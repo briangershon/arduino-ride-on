@@ -1,12 +1,25 @@
 /*
-  Blink
-  Turns on an LED on for one second, then off for one second, repeatedly.
- 
-  This example code is in the public domain.
+  Riley's Disney Vehicle
+  
+  Pin 2 = Horn Button
+  Pin 3 = Ignition Switch (eventually interrupt to wake from sleep)
+  Pin 4 = Castle Button
+  Pin 5 = Forward/Back switch
+  Pin 6 = Front left flower button
+  Pin 7 = Front right flower button
+  Pin 8 = Speaker
+  Pin 12 = Left turn signal LED
+  Pin 13 = Right turn signal LED
  */
  
-const int buttonPin = 2;     // the number of the pushbutton pin
-int buttonState = 0;
+const int buttonHorn = 2;
+const int buttonIgnition = 3;
+const int buttonCastle = 4;
+const int buttonFrontBack = 5;
+const int buttonLeftFlower = 6;
+const int buttonRightFlower = 7;
+
+int cyclesToFastBlink = 0;
 
 // Pin 13 has an LED connected on most Arduino boards.
 // give it a name:
@@ -17,7 +30,24 @@ int blink_delay = 1000;
 
 // the setup routine runs once when you press reset:
 void setup() {
-  pinMode(buttonPin, INPUT);
+  pinMode(buttonHorn, INPUT);
+  digitalWrite(buttonHorn, HIGH);  // enable pull-up
+
+  pinMode(buttonIgnition, INPUT);
+  digitalWrite(buttonIgnition, HIGH);  // enable pull-up
+
+  pinMode(buttonCastle, INPUT);
+  digitalWrite(buttonCastle, HIGH);  // enable pull-up
+
+  pinMode(buttonFrontBack, INPUT);
+  digitalWrite(buttonFrontBack, HIGH);  // enable pull-up
+
+  pinMode(buttonLeftFlower, INPUT);
+  digitalWrite(buttonLeftFlower, HIGH);  // enable pull-up
+
+  pinMode(buttonRightFlower, INPUT);
+  digitalWrite(buttonRightFlower, HIGH);  // enable pull-up
+
   // initialize the digital pin as an output.
   pinMode(green_led, OUTPUT);     
   pinMode(red_led, OUTPUT);     
@@ -25,17 +55,26 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  buttonState = digitalRead(buttonPin);
   
-  if (buttonState == HIGH) {     
-    // turn LED on:    
-    blink_delay = 200;
+  if (digitalRead(buttonHorn) == LOW ||
+    digitalRead(buttonIgnition) == LOW ||
+    digitalRead(buttonCastle) == LOW ||
+    digitalRead(buttonFrontBack) == LOW ||
+    digitalRead(buttonLeftFlower) == LOW ||
+    digitalRead(buttonRightFlower) == LOW
+    ) {     
+      if (cyclesToFastBlink == 0) {
+        cyclesToFastBlink = 10;
+      }
   } 
-  else {
-    // turn LED off:
+
+  if (cyclesToFastBlink > 0) {
+    blink_delay = 200;
+    cyclesToFastBlink--;
+  } else {
     blink_delay = 1000;
-  }
-  
+  }  
+
   digitalWrite(green_led, HIGH);   // turn the LED on (HIGH is the voltage level)
   digitalWrite(red_led, LOW);   // turn the LED on (HIGH is the voltage level)
   delay(blink_delay);               // wait for a second
