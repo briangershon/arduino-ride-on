@@ -89,6 +89,7 @@ void loop() {
     digitalRead(buttonLeftFlower) == LOW ||
     digitalRead(buttonRightFlower) == LOW
     ) {
+      playKeypress();
       cyclesUntilSleep = MAX_CYCLES_UNTIL_SLEEP;  //reset countdown if button pressed
       if (cyclesToFastBlink == 0) {
         //playHornMelody();
@@ -111,6 +112,7 @@ void loop() {
   delay(blink_delay);               // wait for a second
   
   if (cyclesUntilSleep == 0) {
+    playAboutToSleep();
     digitalWrite(green_led, LOW);
     digitalWrite(red_led, LOW);
     sleepNow();
@@ -118,11 +120,44 @@ void loop() {
   cyclesUntilSleep--;
 }
 
-void playWakeup() {
+void playAboutToSleep() {
   int wakeUpMelody[] = {
-    NOTE_C4, NOTE_D4, NOTE_E4};
+    NOTE_E4, NOTE_D4, NOTE_C4};
   // iterate over the notes of the melody:
   for (int thisNote = 0; thisNote < 3; thisNote++) {
+
+    // to calculate the note duration, take one second 
+    // divided by the note type.
+    //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
+    int noteDuration = 1000/16;
+    tone(8, wakeUpMelody[thisNote],noteDuration);
+
+    // to distinguish the notes, set a minimum time between them.
+    // the note's duration + 30% seems to work well:
+    int pauseBetweenNotes = noteDuration * 1.30;
+    delay(pauseBetweenNotes);
+    // stop the tone playing:
+    noTone(8);
+  }
+}
+
+void playKeypress() {
+    int noteDuration = 1000/16;
+    tone(8, NOTE_C5, noteDuration);
+
+    // to distinguish the notes, set a minimum time between them.
+    // the note's duration + 30% seems to work well:
+    int pauseBetweenNotes = noteDuration * 1.30;
+    delay(pauseBetweenNotes);
+    // stop the tone playing:
+    noTone(8);
+}
+
+void playWakeup() {
+  int wakeUpMelody[] = {
+    NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4};
+  // iterate over the notes of the melody:
+  for (int thisNote = 0; thisNote < 4; thisNote++) {
 
     // to calculate the note duration, take one second 
     // divided by the note type.
