@@ -8,7 +8,7 @@ I tried to get things working, but wires were frail and battery wires were fried
 
 I decided to rip out the old electronics and wires, add an Arduino Pro Mini and a lot of solder and rewiring, and was able to repurpose its 6 buttons/switches/levers, 2 LEDs blinkers and speaker.
 
-<img src="https://raw.github.com/briangershon/arduino-ride-on/master/images/photo1.jpg" width="200" style="float:right"/>
+<img src="https://raw.github.com/briangershon/arduino-ride-on/master/images/photo1.jpg" width="400px" />
 
 ## Hardware
 
@@ -43,4 +43,10 @@ This Arduino code does three things:
 * I'd like to spend more time hunting down better sounds, maybe leveraging [Play RTTTL Sounds with Arduino](http://letsmakerobots.com/node/20743) or even a more sophisticated sound system (SD card with sound files).
 
 * A pressure sensor under the seat might be a fun addition, as well as adding more LEDs.
+
+<img src="https://raw.github.com/briangershon/arduino-ride-on/master/images/photo2.jpg" width="400px" />
+
+<img src="https://raw.github.com/briangershon/arduino-ride-on/master/images/photo3.jpg" width="400px" />
+
+<img src="https://raw.github.com/briangershon/arduino-ride-on/master/images/photo4.jpg" width="400px" />
 
