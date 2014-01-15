@@ -1,12 +1,14 @@
-# Arduino-powered Disney Princess Activity Ride-On
+# Arduino-powered Ride-On
 
 Maker: Brian Gershon, Jan 2014
 
-We inherited an older version of a Disney riding toy that was in good shape, but the electronics didn't work.
+We inherited an older version of a Disney Princess Activity Ride-On toy that was in good shape, but the electronics didn't work.
 
 I tried to get things working, but wires were frail and battery wires were fried.
 
 I decided to rip out the old electronics and wires, add an Arduino Pro Mini and a lot of solder and rewiring, and was able to repurpose its 6 buttons/switches/levers, 2 LEDs blinkers and speaker.
+
+<img src="https://raw.github.com/briangershon/arduino-ride-on/master/images/photo1.jpg" width="200" style="float:right"/>
 
 ## Hardware
 
