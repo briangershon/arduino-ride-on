@@ -1,5 +1,6 @@
 /*
   Riley's Disney Vehicle
+  Author: Brian Gershon, Jan 2014
   
   Pin 2 = Horn Button
   Pin 3 = Ignition Switch (eventually interrupt to wake from sleep)
@@ -25,14 +26,12 @@ const int buttonRightFlower = 7;
 
 int cyclesToFastBlink = 0;
 
-// Pin 13 has an LED connected on most Arduino boards.
-// give it a name:
 const int green_led = 13;
 const int red_led = 12;
 
 int blink_delay = 1000;
 
-const int MAX_CYCLES_UNTIL_SLEEP = 40;
+const int MAX_CYCLES_UNTIL_SLEEP = 70;
 int cyclesUntilSleep = 0;
 boolean triggerWakeUpSound = false;
 
@@ -436,13 +435,12 @@ void sing(int s){
 
        // stop the tone playing:
        buzz(melodyPin, 0,noteDuration);
-
     }
   }
 }
 
 void buzz(int targetPin, long frequency, long length) {
-  digitalWrite(13,HIGH);
+  digitalWrite(green_led,HIGH);
   long delayValue = 1000000/frequency/2; // calculate the delay value between transitions
   //// 1 second's worth of microseconds, divided by the frequency, then split in half since
   //// there are two phases to each cycle
@@ -455,6 +453,6 @@ void buzz(int targetPin, long frequency, long length) {
     digitalWrite(targetPin,LOW); // write the buzzer pin low to pull back the diaphram
     delayMicroseconds(delayValue); // wait again or the calculated delay value
   }
-  digitalWrite(13,LOW);
+  digitalWrite(green_led,LOW);
 
 }
